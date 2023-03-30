@@ -59,6 +59,9 @@ void setup() {
 }
 
 void loop() {
+    //compt update
+    compt += 1;
+    
     //temperature
     char tempString[10];
     dtostrf(bme.readTemperature(), 4, 2, tempString); 
@@ -75,15 +78,13 @@ void loop() {
       delay(10000);
       digitalWrite(waterpump, LOW);
       delay(1000);
-      compt += 11000;
     }
 
     sendFake(payloadString);
-    delay(5000);
-    compt += 5000;
     Serial.println(compt);
-    if (compt == 30000){
+    if (compt == 5){
       sendLora(payloadString);
       compt = 0;
     }
+    delay(5000);
 }
